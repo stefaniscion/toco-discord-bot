@@ -30,6 +30,7 @@ class MusicCommands(commands.Cog):
             track = await self._parse_track_request(track_request)
             player = FFmpegOpusAudio(track["stream_url"], **self.FFMPEG_OPTIONS)
             voice_client.play(player)
+            await ctx.send(f"Riproduco: **{track['title']}**\n{track['webpage_url']}\n")
         except Exception as e:
             logging.error(f"Error while playing track: {e}")
 
@@ -58,11 +59,11 @@ class MusicCommands(commands.Cog):
             track = await self._parse_youtube_url(track_request)
         return track
 
-    async def _parse_youtube_url(self, url: str) -> dict:
+    async def _parse_youtube_url(self, track_request: str) -> dict:
         """Parses a YouTube URL"""
         loop = asyncio.get_event_loop()
         info = await loop.run_in_executor(
-            None, lambda: self.yt_dl.extract_info(url, download=False)
+            None, lambda: self.yt_dl.extract_info(track_request, download=False)
         )
         track = {
             "title": info["title"],
