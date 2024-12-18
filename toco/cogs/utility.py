@@ -7,5 +7,5 @@ class UtilityCommands(commands.Cog):
 
     @commands.command()
     async def ping(self, ctx: commands.Context):
-        "Aswers with 'Pong!'"
+        """Answers with 'Pong!'"""
         await ctx.send("Pong!")
