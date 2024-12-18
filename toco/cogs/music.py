@@ -1,6 +1,4 @@
 from discord.ext import commands
-from discord import VoiceChannel
-from discord.utils import get
 
 
 class MusicCommands(commands.Cog):
