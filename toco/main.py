@@ -1,19 +1,26 @@
 import os
+import asyncio
 from dotenv import load_dotenv
 from discord import Intents
-from toco.client import TocoClient
+from toco.bot import TocoBot
+from toco.cogs.utility import UtilityCommands
 
 
-def main():
+async def load_bot():
     load_dotenv()
     token = os.getenv("DISCORD_TOKEN")
-
     intents = Intents.default()
     intents.message_content = True
 
-    client = TocoClient(intents=intents)
-    client.run(token)
+    bot = TocoBot(command_prefix="/", intents=intents)
+
+    await bot.add_cog(UtilityCommands(bot))
+    await bot.start(token)
+
+
+def main():
+    asyncio.run(load_bot())
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(load_bot())
