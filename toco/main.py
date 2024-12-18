@@ -1,11 +1,19 @@
 import os
 import asyncio
+import logging
 from dotenv import load_dotenv
 from discord import Intents
 from discord.ext import commands
 from toco.bot import TocoBot
 from toco.cogs.utility import UtilityCommands
 from toco.cogs.music import MusicCommands
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] [%(levelname)s] %(name)s: %(message)s",
+    handlers=[logging.StreamHandler()],
+)
+
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
