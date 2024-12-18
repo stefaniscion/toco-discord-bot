@@ -16,15 +16,10 @@ class MusicCommands(commands.Cog):
 
         channel = ctx.author.voice.channel
 
-        try:
-            if ctx.voice_client is None:
-                await channel.connect()
-                await ctx.send(f"Mi sono unito al canale vocale: **{channel.name}**!")
+        if ctx.voice_client is None:
+            await channel.connect()
+            await ctx.send(f"Mi sono unito al canale vocale: **{channel.name}**!")
 
-            else:
-                await ctx.voice_client.move_to(channel)
-                await ctx.send(
-                    f"Mi sono spostato nel canale vocale: **{channel.name}**!"
-                )
-        except Exception as e:
-            await ctx.send(f"Errore: {e}")
+        else:
+            await ctx.voice_client.move_to(channel)
+            await ctx.send(f"Mi sono spostato nel canale vocale: **{channel.name}**!")
