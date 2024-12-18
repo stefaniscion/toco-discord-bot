@@ -5,6 +5,7 @@ from discord import Intents
 from discord.ext import commands
 from toco.bot import TocoBot
 from toco.cogs.utility import UtilityCommands
+from toco.cogs.music import MusicCommands
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -15,6 +16,7 @@ intents.message_content = True
 async def setup_cogs(bot: commands.Bot):
     """Adds the cogs to the bot"""
     await bot.add_cog(UtilityCommands(bot))
+    await bot.add_cog(MusicCommands(bot))
 
 
 async def start_bot():
